@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Data Master
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+      <ion-row> 
+          <ion-col (click)="addKendaraan()">
+    <ion-card class="welcome-card">
+      <!-- <img src="/assets/shapes.svg" alt="" /> -->
+      <ion-card-header>
+          <img src="/assets/mobil.png" alt="" style="width:128px;height:128px;"/>
+          <ion-card-subtitle class ="ion-text-center">Kendaraan</ion-card-subtitle>
+      </ion-card-header>
+      
+    </ion-card>
+    </ion-col>
+    <ion-col>
+      
+        <ion-card class="pengemudi-card" (click)="addPengemudi()">
+          <!-- <img src="/assets/shapes.svg" alt="" /> -->
+          <ion-card-header>
+              <img src="/assets/driver.jpg" alt="" style="width:200px;height:128px;"/>
+              <ion-card-subtitle class ="ion-text-center">Pengemudi</ion-card-subtitle>
+          </ion-card-header>
+          
+        </ion-card>
+        </ion-col>
+    </ion-row>
+    <ion-row> 
+        <ion-col>
+  <ion-card class="penghasil-card">
+    <!-- <img src="/assets/shapes.svg" alt="" /> -->
+    <ion-card-header>
+        <img src="/assets/human.png" alt="" style="width:200px;height:128px;"/>
+        <ion-card-subtitle class ="ion-text-center">Penghasil</ion-card-subtitle>
+    </ion-card-header>
+    
+  </ion-card>
+  </ion-col>
+  <ion-col>
+      <ion-card class="izin-card">
+        <!-- <img src="/assets/shapes.svg" alt="" /> -->
+        <ion-card-header>
+            <img src="/assets/doc.png" alt="" style="width:200px;height:128px;"/>
+            <ion-card-subtitle class ="ion-text-center">Izin</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      </ion-col>
+  </ion-row>
+  </ion-grid>
+</ion-content>

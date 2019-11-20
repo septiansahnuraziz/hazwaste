@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list text-center>
+    <br>
+    <H3> Welcome </H3>
+    <br>
+     <ion-item>
+        <ion-label color="primary" >Username</ion-label>
+        <ion-input type="email" [(ngModel)]="credentials.username" ></ion-input>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label color="primary" >Password</ion-label>
+        <ion-input type="password" [(ngModel)]="credentials.password" ></ion-input>
+    </ion-item>
+
+    <br>
+    <br>
+    <button ion-button round center (click)="login()">Login</button>
+
+    <br>
+    <p  text-center tappable> Forget Password </p>
+    <p  text-center tappable (click)="register()" > Don't have account? Register </p>
+</ion-list>
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Tambah Kendaraan</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item>
+    <ion-label>Plat Nomor</ion-label>
+    <ion-select>
+      <ion-select-option value="cat">B 5783 CDS</ion-select-option>
+      <ion-select-option value="dog">B 6543 BKB</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Driver</ion-label>
+    <ion-select>
+      <ion-select-option value="cat">Sukirman</ion-select-option>
+      <ion-select-option value="dog">Edo</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Tanggal</ion-label>
+    <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
+  </ion-item>
+</ion-list>
+</ion-content>
