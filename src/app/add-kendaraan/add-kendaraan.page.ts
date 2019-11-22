@@ -8,14 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddKendaraanPage implements OnInit {
 
+  data: any;
+
   constructor(
-    private apiService: ApiServiceService
+    private apiService: ApiServiceService,
+
   ) {}
 
   ngOnInit() {
-    this.apiService.getKendaraan().subscribe(data => {
-      console.log(data);
-    });
+    this.data = 'komeng';
+  }
+
+  addKendaraan() {
+
   }
 
 }

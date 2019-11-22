@@ -30,7 +30,15 @@ const routes: Routes = [
   {
     path: 'tracking',
     loadChildren: () => import('./tracking/tracking.module').then( m => m.TrackingPageModule)
+  },  {
+    path: 'kendaraan',
+    loadChildren: () => import('./kendaraan/kendaraan.module').then( m => m.KendaraanPageModule)
+  },
+  {
+    path: 'izin',
+    loadChildren: () => import('./izin/izin.module').then( m => m.IzinPageModule)
   }
+
 ];
 
 @NgModule({

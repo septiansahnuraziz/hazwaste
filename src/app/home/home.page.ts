@@ -19,4 +19,8 @@ export class HomePage {
     this.router.navigate(['/add-pengemudi']);
   }
 
+  goIzin() {
+    this.router.navigate(['/izin']);
+  }
+
 }
