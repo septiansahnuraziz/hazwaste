@@ -13,7 +13,7 @@ export class HomePage {
   ) {}
 
   addKendaraan() {
-    this.router.navigate(['/add-kendaraan']);
+    this.router.navigate(['/kendaraan']);
   }
   public addPengemudi() {
     this.router.navigate(['/add-pengemudi']);

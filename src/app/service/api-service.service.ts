@@ -1,3 +1,4 @@
+import { LoginService } from './../login/login.service';
 import { Injectable } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -10,8 +11,9 @@ import { Kendaraan } from './kendaraan.model';
 interface VehicleData {
   plat: string;
   jenis: string;
-  noKlh: number;
-
+  kapasitas: number;
+  noBapedal: string;
+  userId: string;
 }
 
 @Injectable({
@@ -30,24 +32,28 @@ export class ApiServiceService {
 
   constructor(
     private http: HttpClient,
+    private loginService: LoginService
   ) { }
 
 
   addKendaraan(
     plat: string,
     jenis: string,
-    noKlh: number,
+    kapasitas: number,
+    noBapedal: string
   ) {
     let generatedId: string;
     const newVehicle = new Kendaraan(
       Math.random().toString(),
       plat,
       jenis,
-      noKlh,
+      kapasitas,
+      noBapedal,
+      this.loginService.userId
     );
 
     return this.http.post<{name: string}>(
-      `https://hazwaste.firebaseio.com/kendaraan.json'`,
+      `https://hazwaste.firebaseio.com/kendaraan.json`,
     {
       ...newVehicle, id: null
     })
@@ -75,7 +81,10 @@ export class ApiServiceService {
             key,
             resData[key].plat,
             resData[key].jenis,
-            resData[key].noKlh
+            resData[key].kapasitas,
+            resData[key].noBapedal,
+            resData[key].userId,
+
           ));
         }
       }
@@ -88,7 +97,7 @@ export class ApiServiceService {
     );
   }
 
-  getKendaraan(idKendaraan: string) {
+  /*getKendaraan(idKendaraan: string) {
     return this.http.get<VehicleData>(`https://hazwaste.firebaseio.com/kendaraan/${idKendaraan}.json`)
     .pipe(
       map(vehicleData => {
@@ -101,9 +110,9 @@ export class ApiServiceService {
         );
       })
     );
-  }
+  }*/
 
-  updateKendaraan(
+  /*updateKendaraan(
     idKendaraan: string,
     plat: string,
     jenis: string,
@@ -138,6 +147,6 @@ export class ApiServiceService {
         this._kendaraan.next(updatedVehicles);
       })
     );
-  }
+  }*/
 
 }

@@ -1,31 +1,37 @@
 <ion-header>
   <ion-toolbar mode="ios">
-    <ion-title>Kendaraan</ion-title>
+    <ion-title>Daftar Kendaraan</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add" (click)="addKendaraan()"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-list>
-  <ion-item>
-    <ion-label>Plat Nomor</ion-label>
-    <ion-select>
-      <ion-select-option value="cat">B 5783 CDS</ion-select-option>
-      <ion-select-option value="dog">B 6543 BKB</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label>Driver</ion-label>
-    <ion-select>
-      <ion-select-option value="cat">Sukirman</ion-select-option>
-      <ion-select-option value="dog">Komeng</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label>Tanggal</ion-label>
-    <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
-  </ion-item>
-</ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <div *ngIf="isLoading" class="ion-text-center">
+          <ion-spinner color="primary"></ion-spinner>
+        </div>
+        <div class="ion-text-center" *ngIf="!isLoading && loadedVehicles.length <= 0" >
+          <p>Tidak ada Kendaraan. Mohon untuk ditambahkan</p>
+        </div>
+        <ion-item *ngIf="!isLoading && loadedVehicles.length > 0" >
+            <ion-card *ngFor="let kendaraan of loadedVehicles" class="ion-text-center">
+              <ion-card-title>{{kendaraan.plat}}</ion-card-title>
+              <ion-card-subtitle>{{kendaraan.jenis}}</ion-card-subtitle>
+              <ion-card-subtitle>{{kendaraan.kapasitas}} Ton</ion-card-subtitle>
+              <ion-card-subtitle>{{kendaraan.noBapedal}}</ion-card-subtitle>
+            </ion-card>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

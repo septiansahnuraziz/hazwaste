@@ -3,6 +3,8 @@ export class Kendaraan {
         public id: string,
         public plat: string,
         public jenis: string,
-        public noKlh: number,
+        public kapasitas: number,
+        public noBapedal: string,
+        public userId: string
     ) {}
 }
