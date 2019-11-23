@@ -1,5 +1,5 @@
-import { Kendaraan } from './../service/kendaraan.model';
-import { ApiServiceService } from './../service/api-service.service';
+import { Kendaraan } from '../../service/kendaraan.model';
+import { ApiServiceService } from '../../service/api-service.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -36,6 +36,7 @@ export class KendaraanPage implements OnInit {
   }
 
   addKendaraan() {
-    this.router.navigate(['/add-kendaraan']);
+    this.router.navigate(['home/kendaraan/add-kendaraan']);
+    console.log("klik");
   }
 }

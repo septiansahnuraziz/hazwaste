@@ -13,14 +13,14 @@ export class HomePage {
   ) {}
 
   addKendaraan() {
-    this.router.navigate(['/kendaraan']);
+    this.router.navigate(['/home/kendaraan']);
   }
   public addPengemudi() {
-    this.router.navigate(['/add-pengemudi']);
+    this.router.navigate(['/home/add-pengemudi']);
   }
 
   goIzin() {
-    this.router.navigate(['/izin']);
+    this.router.navigate(['/home/izin']);
   }
 
 }

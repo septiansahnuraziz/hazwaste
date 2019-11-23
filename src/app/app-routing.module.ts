@@ -16,12 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
   {
-    path: 'add-kendaraan',
-    loadChildren: () => import('./add-kendaraan/add-kendaraan.module').then( m => m.AddKendaraanPageModule)
+    path: 'home/kendaraan/add-kendaraan',
+    loadChildren: () => import('./home/kendaraan/add-kendaraan/add-kendaraan.module').then( m => m.AddKendaraanPageModule)
   },
   {
-    path: 'add-pengemudi',
-    loadChildren: () => import('./add-pengemudi/add-pengemudi.module').then( m => m.AddPengemudiPageModule)
+    path: 'home/add-pengemudi',
+    loadChildren: () => import('./home/add-pengemudi/add-pengemudi.module').then( m => m.AddPengemudiPageModule)
   },
   {
     path: 'login',
@@ -30,13 +30,14 @@ const routes: Routes = [
   {
     path: 'tracking',
     loadChildren: () => import('./tracking/tracking.module').then( m => m.TrackingPageModule)
-  },  {
-    path: 'kendaraan',
-    loadChildren: () => import('./kendaraan/kendaraan.module').then( m => m.KendaraanPageModule)
   },
   {
-    path: 'izin',
-    loadChildren: () => import('./izin/izin.module').then( m => m.IzinPageModule)
+    path: 'home/kendaraan',
+    loadChildren: () => import('./home/kendaraan/kendaraan.module').then( m => m.KendaraanPageModule)
+  },
+  {
+    path: 'home/izin',
+    loadChildren: () => import('./home/izin/izin.module').then( m => m.IzinPageModule)
   }
 
 ];
