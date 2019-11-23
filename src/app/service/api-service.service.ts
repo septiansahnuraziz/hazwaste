@@ -1,3 +1,4 @@
+import { Pengemudi } from './pengemudi.model';
 import { LoginService } from './../login/login.service';
 import { Injectable } from '@angular/core';
 
@@ -16,6 +17,14 @@ interface VehicleData {
   userId: string;
 }
 
+interface DriverData {
+  noSim: string;
+  nama: string;
+  foto: string;
+  noTelp: string;
+  userId: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,9 +34,14 @@ export class ApiServiceService {
 
   // tslint:disable-next-line: variable-name
   private _kendaraan = new BehaviorSubject<Kendaraan[]>([]);
+  private _pengemudi = new BehaviorSubject<Pengemudi[]>([]);
 
   get vehicles() {
     return this._kendaraan.asObservable();
+  }
+
+  get drivers() {
+    return this._pengemudi.asObservable();
   }
 
   constructor(
@@ -149,4 +163,63 @@ export class ApiServiceService {
     );
   }*/
 
+  addPengemudi(
+    noSim: string,
+    nama: string,
+    noTelp: string
+  ) {
+    let generatedId: string;
+    const newDriver = new Pengemudi(
+      Math.random().toString(),
+      noSim,
+      nama,
+      'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png',
+      noTelp,
+      this.loginService.userId
+    );
+
+    return this.http.post<{name: string}>(
+      `https://hazwaste.firebaseio.com/pengemudi.json`,
+    {
+      ...newDriver, id: null
+    })
+    .pipe(
+      switchMap(resData => {
+        generatedId = resData.name;
+        return this.drivers;
+      }),
+      take(1),
+      tap(drivers => {
+        newDriver.id = generatedId;
+        this._pengemudi.next(drivers.concat(newDriver));
+      })
+    );
+  }
+
+  fetchPengemudi() {
+    return this.http.get<{[key: string]: DriverData}>(
+      `https://hazwaste.firebaseio.com/pengemudi.json`
+    ).pipe(map(resData => {
+      const drivers = [];
+      for (const key in resData) {
+        if (resData.hasOwnProperty(key)) {
+          drivers.push(new Pengemudi(
+            key,
+            resData[key].nama,
+            resData[key].noSim,
+            resData[key].foto,
+            resData[key].noTelp,
+            resData[key].userId,
+
+          ));
+        }
+      }
+
+      return drivers;
+    }),
+    tap(drivers => {
+      this._pengemudi.next(drivers);
+    })
+    );
+  }
 }

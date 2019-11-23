@@ -22,12 +22,12 @@
         <div class="ion-text-center" *ngIf="!isLoading && loadedVehicles.length <= 0" >
           <p>Tidak ada Kendaraan. Mohon untuk ditambahkan</p>
         </div>
-        <ion-item *ngIf="!isLoading && loadedVehicles.length > 0" >
-            <ion-card *ngFor="let kendaraan of loadedVehicles" class="ion-text-center">
-              <ion-card-title>{{kendaraan.plat}}</ion-card-title>
-              <ion-card-subtitle>{{kendaraan.jenis}}</ion-card-subtitle>
-              <ion-card-subtitle>{{kendaraan.kapasitas}} Ton</ion-card-subtitle>
-              <ion-card-subtitle>{{kendaraan.noBapedal}}</ion-card-subtitle>
+        <ion-item *ngIf="!isLoading && loadedVehicles.length > 0" lines="none">
+            <ion-card *ngFor="let kendaraan of loadedVehicles" class="ion-padding">
+              <ion-card-title>Plat Nomor      : {{kendaraan.plat}}</ion-card-title>
+              <ion-card-subtitle>Jenis        : {{kendaraan.jenis}}</ion-card-subtitle>
+              <ion-card-subtitle>Kapasitas    : {{kendaraan.kapasitas}} Ton</ion-card-subtitle>
+              <ion-card-subtitle>No. Bapedal  : {{kendaraan.noBapedal}}</ion-card-subtitle>
             </ion-card>
           </ion-item>
       </ion-col>

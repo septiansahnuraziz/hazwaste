@@ -20,8 +20,8 @@ const routes: Routes = [
     loadChildren: () => import('./home/kendaraan/add-kendaraan/add-kendaraan.module').then( m => m.AddKendaraanPageModule)
   },
   {
-    path: 'home/add-pengemudi',
-    loadChildren: () => import('./home/add-pengemudi/add-pengemudi.module').then( m => m.AddPengemudiPageModule)
+    path: 'home/pengemudi/add-pengemudi',
+    loadChildren: () => import('./home/pengemudi/add-pengemudi/add-pengemudi.module').then( m => m.AddPengemudiPageModule)
   },
   {
     path: 'login',
@@ -38,7 +38,12 @@ const routes: Routes = [
   {
     path: 'home/izin',
     loadChildren: () => import('./home/izin/izin.module').then( m => m.IzinPageModule)
+  },
+  {
+    path: 'home/pengemudi',
+    loadChildren: () => import('./home/pengemudi/pengemudi.module').then( m => m.PengemudiPageModule)
   }
+
 
 ];
 

@@ -1,0 +1,59 @@
+
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Tambah Pengemudi</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/pengemudi"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+          <ion-col size="12" offset-sm="3">
+              <ion-item>
+                <ion-label position="floating">Nomor SIM</ion-label>
+                <ion-input
+                  type="text"
+                  formControlName="sim"
+                  max="12"
+                >
+
+                </ion-input>
+              </ion-item>
+            </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="12" offset-sm="6">
+            <ion-item>
+              <ion-label position="floating">Nama</ion-label>
+              <ion-input
+                type="text"
+                formControlName="nama"
+              >
+
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" offset-sm="6">
+              <ion-item>
+                <ion-label position="floating">Nomor Telp</ion-label>
+                <ion-input
+                  type="text"
+                  formControlName="telp"
+                >
+
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+    </ion-grid>
+  </form>
+
+  <ion-button expand="block" (click)="addPengemudi()">Simpan</ion-button>
+
+</ion-content>

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddPengemudiPageRoutingModule } from './add-pengemudi-routing.module';
+import { PengemudiPageRoutingModule } from './pengemudi-routing.module';
 
-import { AddPengemudiPage } from './add-pengemudi.page';
+import { PengemudiPage } from './pengemudi.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddPengemudiPageRoutingModule
+    PengemudiPageRoutingModule
   ],
-  declarations: [AddPengemudiPage]
+  declarations: [PengemudiPage]
 })
-export class AddPengemudiPageModule {}
+export class PengemudiPageModule {}

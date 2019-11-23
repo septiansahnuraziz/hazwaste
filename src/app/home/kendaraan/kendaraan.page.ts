@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class KendaraanPage implements OnInit {
 
-  private vehicleSub: Subscription;
+  vehicleSub: Subscription;
   loadedVehicles: Kendaraan[];
   isLoading = false;
 

@@ -12,11 +12,12 @@ export class HomePage {
     private router: Router,
   ) {}
 
-  addKendaraan() {
+  gotoKendaraan() {
     this.router.navigate(['/home/kendaraan']);
   }
-  public addPengemudi() {
-    this.router.navigate(['/home/add-pengemudi']);
+
+  gotoPengemudi() {
+    this.router.navigate(['/home/pengemudi']);
   }
 
   goIzin() {

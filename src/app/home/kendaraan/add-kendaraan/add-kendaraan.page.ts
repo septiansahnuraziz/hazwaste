@@ -12,7 +12,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class AddKendaraanPage implements OnInit {
 
-  data: any;
+
   form: FormGroup;
 
   constructor(
@@ -60,7 +60,7 @@ export class AddKendaraanPage implements OnInit {
         console.log(dataKendaraan);
         loadingEl.dismiss();
         this.form.reset();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/kendaraan']);
       });
     });
   }
