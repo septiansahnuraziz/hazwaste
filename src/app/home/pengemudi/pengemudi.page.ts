@@ -41,4 +41,8 @@ export class PengemudiPage implements OnInit {
     this.router.navigate(['home/pengemudi/add-pengemudi']);
   }
 
+  goToKendaraan() {
+    this.router.navigate(['home']);
+  }
+
 }

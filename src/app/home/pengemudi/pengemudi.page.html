@@ -23,18 +23,23 @@
               <p>Tidak ada Pengemudi. Mohon untuk ditambahkan</p>
             </div>
             <ion-item *ngIf="!isLoading && loadedDrivers.length > 0" lines="none">
-                <ion-card *ngFor="let driver of loadedDrivers" class="ion-text-center">
-                    <ion-item>
+                <div>
+                <div *ngFor="let driver of loadedDrivers">
+                 
+                    <ion-item class="items" (click)="goToKendaraan()">
                         <ion-avatar slot="start">
                           <img src="{{driver.foto}}">
                         </ion-avatar>
                         <ion-label>
-                          <h3>{{driver.nama}}</h3>
+                          <h2>{{driver.nama}}</h2>
                           <p>{{driver.noSim}}</p>
                           <p>{{driver.noTelp}}</p>
                         </ion-label>
                       </ion-item>
-                </ion-card>
+
+
+                </div>
+              </div> <br>
               </ion-item>
           </ion-col>
         </ion-row>
