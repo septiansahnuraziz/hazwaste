@@ -41,6 +41,6 @@ export class ListPage implements OnInit {
   // }
 
   next() {
-    this.router.navigate(['/kendaraan']);
+    this.router.navigate(['/home/kendaraan/add-kendaraan']);
   }
 }

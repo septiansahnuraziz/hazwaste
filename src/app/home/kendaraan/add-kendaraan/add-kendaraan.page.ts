@@ -31,10 +31,10 @@ export class AddKendaraanPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required, Validators.maxLength(12)]
       }),
-      kapasitas: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
+      // kapasitas: new FormControl(null, {
+      //   updateOn: 'blur',
+      //   validators: [Validators.required]
+      // }),
       noBapedal: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
@@ -51,12 +51,11 @@ export class AddKendaraanPage implements OnInit {
       message: 'Menambah kendaraan...'
     }).then(loadingEl => {
       loadingEl.present();
-      this.apiService.addKendaraan(
-        this.form.value.plat,
-        this.form.value.jenis,
-        this.form.value.kapasitas,
-        this.form.value.noBapedal
-      ).subscribe((dataKendaraan) => {
+      this.apiService.tambahKendaraan(
+          this.form.value.plat,
+          this.form.value.jenis,
+          this.form.value.noBapedal
+        ).subscribe((dataKendaraan) => {
         console.log(dataKendaraan);
         loadingEl.dismiss();
         this.form.reset();

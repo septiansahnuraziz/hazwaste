@@ -15,21 +15,28 @@ export class KendaraanPage implements OnInit {
   loadedVehicles: Kendaraan[];
   isLoading = false;
 
+  loadedKendaraan: any;
+
   constructor(
     private apiService: ApiServiceService,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.vehicleSub = this.apiService.vehicles.subscribe(kendaraan => {
+    /*this.vehicleSub = this.apiService.vehicles.subscribe(kendaraan => {
       this.loadedVehicles = kendaraan;
       console.log(kendaraan);
+    });*/
+
+    this.apiService.getCobaKendaraan().subscribe(datanya => {
+      console.log(datanya);
+      this.loadedKendaraan = datanya;
     });
   }
 
   ionViewWillEnter() {
    this.isLoading = true;
-   this.apiService.fetchKendaraan().subscribe((data) => {
+   this.apiService.getCobaKendaraan().subscribe((data) => {
      console.log(data);
      this.isLoading = false;
    });

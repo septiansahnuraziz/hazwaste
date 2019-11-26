@@ -13,7 +13,7 @@ import { Driver } from 'selenium-webdriver/chrome';
 export class PengemudiPage implements OnInit {
 
   driverSub: Subscription;
-  loadedDrivers: Pengemudi[];
+  loadedDrivers: any;
   isLoading = false;
 
   constructor(
@@ -23,16 +23,22 @@ export class PengemudiPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.driverSub = this.apiService.drivers.subscribe(pengemudi => {
-      this.loadedDrivers = pengemudi;
-      console.log(pengemudi);
+    // this.driverSub = this.apiService.drivers.subscribe(pengemudi => {
+    //   this.loadedDrivers = pengemudi;
+    //   console.log(pengemudi);
+    // });
+
+    this.apiService.getPengemudi().subscribe(datanya => {
+      console.log(datanya);
+      this.loadedDrivers = datanya;
     });
   }
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.apiService.fetchPengemudi().subscribe((data) => {
+    this.apiService.getPengemudi().subscribe((data) => {
       console.log(data);
+      this.loadedDrivers = data;
       this.isLoading = false;
     });
    }

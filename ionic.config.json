@@ -1,5 +1,11 @@
 {
   "name": "hazwaste",
   "integrations": {},
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyurl": "http://localhost:3000"
+    }
+  ]
 }

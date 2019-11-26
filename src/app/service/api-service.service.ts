@@ -3,7 +3,7 @@ import { LoginService } from './../login/login.service';
 import { Injectable } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { take, map, tap, delay, switchMap } from 'rxjs/operators';
 import { Kendaraan } from './kendaraan.model';
@@ -49,8 +49,24 @@ export class ApiServiceService {
     private loginService: LoginService
   ) { }
 
+  getCobaKendaraan() {
+    return this.http.get(this.url + '/kendaraan', {responseType: 'json'});
+  }
 
-  addKendaraan(
+  tambahKendaraan(plat, jenis, no_klh) {
+    const body = new URLSearchParams();
+    body.append('plat', plat);
+    body.append('jenis', jenis);
+    body.append('no_klh', no_klh);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.post(this.url + '/kendaraan', body.toString(), options);
+  }
+
+  /*addKendaraan(
     plat: string,
     jenis: string,
     kapasitas: number,
@@ -163,16 +179,33 @@ export class ApiServiceService {
     );
   }*/
 
-  addPengemudi(
-    noSim: string,
+  getPengemudi() {
+    return this.http.get(this.url + '/pengemudi', {responseType: 'json'});
+  }
+
+  tambahPengemudi(sim, nama, telepon) {
+    const body = new URLSearchParams();
+    body.append('sim', sim);
+    body.append('nama', nama);
+    body.append('telepon', telepon);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.post(this.url + '/pengemudi', body.toString(), options);
+  }
+
+  /*addPengemudi(
     nama: string,
+    noSim: string,
     noTelp: string
   ) {
     let generatedId: string;
     const newDriver = new Pengemudi(
       Math.random().toString(),
-      noSim,
       nama,
+      noSim,
       'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png',
       noTelp,
       this.loginService.userId
@@ -214,12 +247,12 @@ export class ApiServiceService {
           ));
         }
       }
-
+      console.log(drivers);
       return drivers;
     }),
     tap(drivers => {
       this._pengemudi.next(drivers);
     })
     );
-  }
+  }*/
 }

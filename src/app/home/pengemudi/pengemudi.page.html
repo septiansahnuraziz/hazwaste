@@ -19,21 +19,21 @@
             <div *ngIf="isLoading" class="ion-text-center">
               <ion-spinner color="primary"></ion-spinner>
             </div>
-            <div class="ion-text-center" *ngIf="!isLoading && loadedDrivers.length <= 0" >
+            <div class="ion-text-center" *ngIf="!isLoading && loadedDrivers == 0" >
               <p>Tidak ada Pengemudi. Mohon untuk ditambahkan</p>
             </div>
-            <ion-item *ngIf="!isLoading && loadedDrivers.length > 0" lines="none">
+            <ion-item *ngIf="!isLoading && loadedDrivers != 0" lines="none">
                 <div>
                 <div *ngFor="let driver of loadedDrivers">
                  
                     <ion-item class="items" (click)="goToKendaraan()">
                         <ion-avatar slot="start">
-                          <img src="{{driver.foto}}">
+                          <img src="https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-15.jpg">
                         </ion-avatar>
                         <ion-label>
                           <h2>{{driver.nama}}</h2>
-                          <p>{{driver.noSim}}</p>
-                          <p>{{driver.noTelp}}</p>
+                          <p>{{driver.sim}}</p>
+                          <p>{{driver.telepon}}</p>
                         </ion-label>
                       </ion-item>
 
