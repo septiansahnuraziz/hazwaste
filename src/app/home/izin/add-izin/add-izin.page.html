@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Izin</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-list>
+    <ion-item>
+      <ion-label position="floating">No. Ijin Pengangkutan</ion-label>
+      <ion-input>
+
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Berlaku mulai</ion-label>
+      <ion-datetime min="2019-01-01" max="2024-12-31"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Berlaku sampai</ion-label>
+        <ion-datetime min="2019-01-01" max="2024-12-31"></ion-datetime>
+      </ion-item>
+  </ion-list>
+  <ion-button expand="block">Simpan</ion-button> -->
+
+  <form [formGroup]="form">
+
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">No. Ijin Pengangkutan</ion-label>
+              <ion-input type="text" formControlName="no_ijin" placeholder="Awesome Input" max="12">
+
+              </ion-input>
+            </ion-item>
+
+          </ion-col>
+          <ion-col size="12">
+              <ion-item>
+                  <ion-label>tanggal mulai</ion-label>
+                  <ion-datetime displayFormat="YYYY-MM-DD" formControlName="berlaku_mulai"></ion-datetime>
+                  <!-- <ion-datetime value="1990-02-20"  formControlName="berlaku_mulai" placeholder="Select Date"></ion-datetime> -->
+               
+              </ion-item>
+  
+            </ion-col>
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label>tanggal selesai</ion-label>
+                    <ion-datetime displayFormat="YYYY-MM-DD" formControlName="berlaku_sampai"></ion-datetime>
+    
+                 
+                </ion-item>
+    
+              </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+  </form>
+  <ion-button expand="block" [disabled]="!form.valid" (click)="addIzin()">Simpan</ion-button>
+</ion-content>
+
