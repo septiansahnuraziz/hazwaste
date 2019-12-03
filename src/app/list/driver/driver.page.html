@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Driver</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/list"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>
+      Plat Nomor
+    </ion-label>
+    <ion-select ok-text="Pilih" cancel-text="Kembali">
+    </ion-select>
+  </ion-item>
+  <ion-item>
+      <ion-label>
+        Driver
+      </ion-label>
+      <ion-select ok-text="Pilih" cancel-text="Kembali">
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>
+          Tanggal
+        </ion-label>
+        <ion-datetime min="2019-01-01" max="2025-12-31"></ion-datetime>
+        
+      </ion-item>
+</ion-content>

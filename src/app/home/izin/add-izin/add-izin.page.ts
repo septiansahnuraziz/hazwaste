@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { ApiServiceService } from './../../../service/api-service.service';
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-izin',
@@ -10,13 +11,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-izin.page.scss'],
 })
 export class AddIzinPage implements OnInit {
-  
+
   form: FormGroup;
 
   constructor(
     private apiService: ApiServiceService,
     public loadingController: LoadingController,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
 
   ) { }
 
@@ -38,10 +40,20 @@ export class AddIzinPage implements OnInit {
     });
   }
 
-  addIzin(){
-    if (!this.form.valid) {
-      return;
-    }
+  addIzin() {
+    // if (!this.form.valid) {
+    //   return;
+    // }
+
+    const no = this.form.value.no_ijin;
+    const mulai = new Date(this.form.value.berlaku_mulai);
+    const sampai = this.form.value.berlaku_sampai;
+
+    const formatMulai = this.datePipe.transform(mulai, 'dd-MM-yyyy');
+    const formatSampai = this.datePipe.transform(sampai, 'dd-MM-yyyy');
+
+
+    console.log({no, formatMulai, formatSampai});
 
     this.loadingController.create({
       message: 'Menambahkan Perizin'
@@ -49,10 +61,10 @@ export class AddIzinPage implements OnInit {
       loadingEl.present();
       this.apiService.tambahPerizinan(
         this.form.value.no_ijin,
-        new Date (this.form.value.berlaku_mulai),
-        new Date (this.form.value.berlaku_sampai)
+        formatMulai,
+        formatSampai
       ).subscribe((dataPerizinan)  => {
-        console.log(dataPerizinan);
+        console.log({dataPerizinan});
         loadingEl.dismiss();
         this.form.reset();
         this.router.navigate(['home/izin']);

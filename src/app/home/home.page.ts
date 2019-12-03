@@ -26,7 +26,7 @@ export class HomePage implements OnInit{
   }
 
   goIzin() {
-    this.router.navigate(['/home/izin']);
+    this.router.navigate(['/home/izin/add-izin']);
   }
 
 

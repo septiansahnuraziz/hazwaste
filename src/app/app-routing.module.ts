@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/pengemudi/add-pengemudi/add-pengemudi.module').then( m => m.AddPengemudiPageModule)
   },
   {
+    path: 'home/izin/add-izin',
+    loadChildren: () => import('./home/izin/add-izin/add-izin.module').then( m => m.AddIzinPageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -42,7 +46,12 @@ const routes: Routes = [
   {
     path: 'home/pengemudi',
     loadChildren: () => import('./home/pengemudi/pengemudi.module').then( m => m.PengemudiPageModule)
+  },
+  {
+    path: 'list/driver',
+    loadChildren: () => import('./list/driver/driver.module').then( m => m.DriverPageModule)
   }
+
 
 
 ];

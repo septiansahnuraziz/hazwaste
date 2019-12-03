@@ -46,7 +46,7 @@ export class ApiServiceService {
 
   constructor(
     private http: HttpClient,
-    private loginService: LoginService
+    private loginService: LoginService,
   ) { }
 
   getCobaKendaraan() {
@@ -64,6 +64,19 @@ export class ApiServiceService {
     };
 
     return this.http.post(this.url + '/kendaraan', body.toString(), options);
+  }
+
+  tambahPerizinan(noIjin, berlakuMulai, berlakuSampai) {
+    const body = new URLSearchParams();
+    body.append('nomor', noIjin);
+    body.append('mulai', berlakuMulai);
+    body.append('selesai', berlakuSampai);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.post(this.url + '/ijin', body.toString(), options);
   }
 
   /*addKendaraan(
@@ -180,6 +193,7 @@ export class ApiServiceService {
   }*/
 
   getPengemudi() {
+    // return this.http.get(this.url + '/pengemudi', {responseType: 'json'});
     return this.http.get(this.url + '/pengemudi', {responseType: 'json'});
   }
 
@@ -255,4 +269,20 @@ export class ApiServiceService {
     })
     );
   }*/
+
+  getPenghasil() {
+    return this.http.get(this.url + '/penghasil');
+  }
+
+  getJenisLimbah() {
+    return this.http.get(this.url + '/jenis');
+  }
+
+  getKemasan() {
+    return this.http.get(this.url + '/kemasan');
+  }
+
+  getUnit() {
+    return this.http.get(this.url + '/unit');
+  }
 }

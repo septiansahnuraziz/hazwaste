@@ -1,3 +1,4 @@
+import { ApiServiceService } from 'src/app/service/api-service.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPage implements OnInit {
   private selectedItem: any;
+
+  listPenghasil: any = [];
+
   private icons = [
     'flask',
     'wifi',
@@ -22,7 +26,8 @@ export class ListPage implements OnInit {
   ];
   public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(
-    private router: Router
+    private router: Router,
+    private service: ApiServiceService
   ) {
     for (let i = 1; i < 11; i++) {
       this.items.push({
@@ -34,6 +39,22 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
+    this.service.getPenghasil().subscribe(pengemudi => {
+      console.log(pengemudi);
+      this.listPenghasil = pengemudi;
+    });
+
+    this.service.getJenisLimbah().subscribe(limbah => {
+      console.log(limbah);
+    });
+
+    this.service.getKemasan().subscribe(kemasan => {
+      console.log(kemasan);
+    });
+
+    this.service.getUnit().subscribe(unit => {
+      console.log(unit);
+    });
   }
   // add back when alpha.4 is out
   // navigate(item) {
@@ -41,6 +62,6 @@ export class ListPage implements OnInit {
   // }
 
   next() {
-    this.router.navigate(['/home/kendaraan/add-kendaraan']);
+    this.router.navigate(['/list/driver']);
   }
 }

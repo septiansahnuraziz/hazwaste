@@ -19,8 +19,7 @@
     <ion-item>
       <ion-label>Penghasil</ion-label>
       <ion-select>
-        <ion-select-option value="cat">Cat</ion-select-option>
-        <ion-select-option value="dog">Dog</ion-select-option>
+        <ion-select-option *ngFor="let item of listPenghasil" value="item.id">{{item.nama}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>

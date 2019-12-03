@@ -1,6 +1,8 @@
 {
   "name": "hazwaste",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "proxies": [
     {
