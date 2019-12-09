@@ -17,27 +17,25 @@
       <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Penghasil</ion-label>
+      <ion-label position="floating">Penghasil</ion-label>
       <ion-select>
         <ion-select-option *ngFor="let item of listPenghasil" value="item.id">{{item.nama}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Jenis Limbah</ion-label>
+      <ion-label position="floating">Jenis Limbah</ion-label>
       <ion-select>
-        <ion-select-option value="cat">Cat</ion-select-option>
-        <ion-select-option value="dog">Dog</ion-select-option>
+        <ion-select-option *ngFor="let item of listJenisLimbah"  value="item.id">{{item.jenis}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Kelompok Kemasan</ion-label>
+      <ion-label position="floating">Kelompok Kemasan</ion-label>
       <ion-select>
-        <ion-select-option value="cat">Cat</ion-select-option>
-        <ion-select-option value="dog">Dog</ion-select-option>
+        <ion-select-option *ngFor="let item of listKemasan"  value="item.id">{{item.kemasan}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Jumlah Pesanan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-label position="floating">Jumlah Pesanan<ion-text color="danger">*</ion-text></ion-label>
       <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
     </ion-item>
     <ion-item>
@@ -45,14 +43,13 @@
       <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Unit</ion-label>
+      <ion-label position="floating">Unit</ion-label>
       <ion-select>
-        <ion-select-option value="cat">Cat</ion-select-option>
-        <ion-select-option value="dog">Dog</ion-select-option>
+        <ion-select-option *ngFor="let item of listUnit" value="item.id">{{item.unit}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Tujuan</ion-label>
+      <ion-label position="floating">Tujuan</ion-label>
       <ion-select>
         <ion-select-option value="cat">Cat</ion-select-option>
         <ion-select-option value="dog">Dog</ion-select-option>

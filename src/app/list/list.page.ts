@@ -11,31 +11,34 @@ export class ListPage implements OnInit {
   private selectedItem: any;
 
   listPenghasil: any = [];
+  listJenisLimbah: any = [];
+  listKemasan: any = [];
+  listUnit: any = [];
 
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
+  // private icons = [
+  //   'flask',
+  //   'wifi',
+  //   'beer',
+  //   'football',
+  //   'basketball',
+  //   'paper-plane',
+  //   'american-football',
+  //   'boat',
+  //   'bluetooth',
+  //   'build'
+  // ];
   public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(
     private router: Router,
     private service: ApiServiceService
   ) {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+    // for (let i = 1; i < 11; i++) {
+    //   this.items.push({
+    //     title: 'Item ' + i,
+    //     note: 'This is item #' + i,
+    //     icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+    //   });
+    // }
   }
 
   ngOnInit() {
@@ -46,14 +49,17 @@ export class ListPage implements OnInit {
 
     this.service.getJenisLimbah().subscribe(limbah => {
       console.log(limbah);
+      this.listJenisLimbah  = limbah;
     });
 
     this.service.getKemasan().subscribe(kemasan => {
       console.log(kemasan);
+      this.listKemasan = kemasan;
     });
 
     this.service.getUnit().subscribe(unit => {
       console.log(unit);
+      this.listUnit = unit;
     });
   }
   // add back when alpha.4 is out

@@ -50,7 +50,12 @@ const routes: Routes = [
   {
     path: 'list/driver',
     loadChildren: () => import('./list/driver/driver.module').then( m => m.DriverPageModule)
+  },
+  {
+    path: 'home/penghasil',
+    loadChildren: () => import('./home/penghasil/penghasil.module').then( m => m.PenghasilPageModule)
   }
+
 
 
 
