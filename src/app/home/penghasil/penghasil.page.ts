@@ -31,10 +31,36 @@ export class PenghasilPage implements OnInit {
     this.map = new google.maps.Map(
       this.mapElement.nativeElement,
       {
-        center: {lat: -6.2399482, lng: 106.7911178},
+        center: {lat: -6.2285507, lng: 106.7889774},
         zoom: 8
       }
     );
+
+    // const infoWindow = new google.maps.InfoWindow();
+    const pos = {
+      lat: -6.2285507,
+      lng: 106.7889774
+    };
+
+    /*console.log(infoWindow);
+    console.log(this.map);
+
+    infoWindow.setPosition(pos);
+    // infoWindow.setContent('Location found.');
+    infoWindow.open(this.map);*/
+    const infoWindow = new google.maps.InfoWindow();
+
+    this.map.setCenter(pos);
+
+    const marker = new google.maps.Marker({
+      position: pos,
+      map: this.map,
+      title: 'Your location'
+    });
+
+    marker.addListener('click', function() {
+      infoWindow.open(this.map, marker);
+    });
   }
 
   addPenghasil() {}
