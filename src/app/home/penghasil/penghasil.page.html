@@ -8,38 +8,44 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="form"> 
+  <form [formGroup]="form">
     <ion-grid>
         <ion-row>
             <ion-col size="12" offset-sm="6">
-              <ion-item>
-                <ion-label position="floating">Nama</ion-label>
-                <ion-input
+              <ion-item lines="none">
+                <!-- <ion-label position="fixed">Nama</ion-label> -->
+                <input
+                  class="input"
                   type="text"
                   formControlName="nama"
-                >
-                </ion-input>
+                  placeholder="Name"
+                />
+
               </ion-item>
             </ion-col>
           </ion-row>
       <ion-row>
           <ion-col size="12" offset-sm="3">
-              <ion-item>
-                <ion-label position="floating">Lokasi</ion-label>
-                <ion-input
+              <ion-item lines="none">
+                <!-- <ion-label position="floating">Lokasi</ion-label> -->
+                <input
+                  class="input"
                   type="text"
-                  formControlName="lokasi"                  
-                >
-                </ion-input>
+                  formControlName="lokasi"
+                  #autoCompleteInput
+                />
               </ion-item>
             </ion-col>
       </ion-row>
     </ion-grid>
   </form>
-  <div #mapElement class="map">
-
+  <div #mapElement class="map"></div>
+  <div id="infowindow-content">
+    <img src="" width="16" height="16" id="place-icon">
+    <span id="place-name"  class="title"></span><br>
+    <span id="place-address"></span>
   </div>
 
-  <ion-button expand="block" (click)="addPenghasil()">Simpan</ion-button>
+  <ion-button class="ion-margin" expand="block" (click)="addPenghasil()">Simpan</ion-button>
 
 </ion-content>

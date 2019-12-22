@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PenghasilPageRoutingModule } from './penghasil-routing.module';
 
 import { PenghasilPage } from './penghasil.page';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { PenghasilPage } from './penghasil.page';
     IonicModule,
     PenghasilPageRoutingModule
   ],
-  declarations: [PenghasilPage]
+  declarations: [PenghasilPage],
+  providers: [Geolocation]
 })
 export class PenghasilPageModule {}

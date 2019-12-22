@@ -1,5 +1,8 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ApiServiceService } from 'src/app/service/api-service.service';
+import { LoadingController } from '@ionic/angular';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 declare var google;
 
@@ -8,15 +11,31 @@ declare var google;
   templateUrl: './penghasil.page.html',
   styleUrls: ['./penghasil.page.scss'],
 })
-export class PenghasilPage implements OnInit {
+export class PenghasilPage implements OnInit, AfterViewInit {
+
+
+
+  namaAlamat: any;
+
+  lat: any;
+  long: any;
 
   map;
   @ViewChild('mapElement', {static : true}) mapElement;
+  @ViewChild('autoCompleteInput', {static : true}) inputNativeElement;
   form: FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private loadingCtrl: LoadingController,
+    private apiService: ApiServiceService,
+    private geolocation: Geolocation
+  ) {
+    this.createDirectionForm();
+  }
 
-  ngOnInit() {
+
+  createDirectionForm() {
     this.form = new FormGroup({
       nama: new FormControl(null, {
         updateOn: 'blur',
@@ -27,20 +46,88 @@ export class PenghasilPage implements OnInit {
         validators: [Validators.required]
       })
     });
+  }
 
-    this.map = new google.maps.Map(
-      this.mapElement.nativeElement,
-      {
-        center: {lat: -6.2285507, lng: 106.7889774},
-        zoom: 8
-      }
-    );
+  ngAfterViewInit(): void {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // console.log(resp.coords.latitude);
+      this.lat = resp.coords.latitude;
+      this.long = resp.coords.longitude;
+      this.map = new google.maps.Map(
+        this.mapElement.nativeElement,
+        {
+          center: {lat: this.lat, lng: this.long},
+          zoom: 15
+        }
+      );
+
+      const infoWindow = new google.maps.InfoWindow();
+      const infoWindowContent = document.getElementById('infowindow-content');
+      infoWindow.setContent(infoWindowContent);
+
+      const marker = new google.maps.Marker({
+        // position: pos,
+        map: this.map,
+        title: 'Your location',
+        anchorPoint: new google.maps.Point(0, 10)
+      });
+
+      // marker.addListener('click', function() {
+      //   infoWindow.open(this.map, marker);
+      // });
+
+      const autocomplete = new google.maps.places.Autocomplete(this.inputNativeElement.nativeElement as HTMLInputElement);
+      autocomplete.addListener('place_changed', () => {
+        infoWindow.close();
+        marker.setVisible(false);
+        const place = autocomplete.getPlace();
+        console.log(place.formatted_address);
+        console.log(place.name);
+        // this.form.value.nama = place.name;
+        this.namaAlamat = place.formatted_address;
+        if (!place.geometry) {
+          window.alert('No details available for input: ' + place.name);
+          return;
+        }
+        if (place.geometry.viewport) {
+          this.map.fitBounds(place.geometry.viewport);
+        } else {
+          this.map.setCenter(place.geometry.location);
+          this.map.setZoom(17);
+
+        }
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+
+        let address = '';
+        if (place.address_components) {
+          address = [
+            (place.address_components[0] && place.address_components[0].short_name || ''),
+            (place.address_components[1] && place.address_components[1].short_name || ''),
+            (place.address_components[2] && place.address_components[2].short_name || '')
+          ].join(' ');
+        }
+
+
+
+        infoWindowContent.children['place-icon'].src = place.icon;
+        infoWindowContent.children['place-name'].textContent = place.name;
+        infoWindowContent.children['place-address'].textContent = address;
+        infoWindow.open(this.map, marker);
+      });
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+
 
     // const infoWindow = new google.maps.InfoWindow();
-    const pos = {
-      lat: -6.2285507,
-      lng: 106.7889774
-    };
+    // const pos = {
+    //   lat: -6.2285507,
+    //   lng: 106.7889774
+    // };
 
     /*console.log(infoWindow);
     console.log(this.map);
@@ -48,21 +135,39 @@ export class PenghasilPage implements OnInit {
     infoWindow.setPosition(pos);
     // infoWindow.setContent('Location found.');
     infoWindow.open(this.map);*/
-    const infoWindow = new google.maps.InfoWindow();
 
-    this.map.setCenter(pos);
 
-    const marker = new google.maps.Marker({
-      position: pos,
-      map: this.map,
-      title: 'Your location'
-    });
+    // this.map.setCenter(pos);
 
-    marker.addListener('click', function() {
-      infoWindow.open(this.map, marker);
-    });
+
   }
 
-  addPenghasil() {}
+  ngOnInit() {
+
+  }
+
+  addPenghasil() {
+    console.log(this.form.value.nama);
+    console.log(this.namaAlamat);
+
+    if (!this.form.valid) {
+      return;
+    }
+
+    this.loadingCtrl.create({
+      message: 'Menambah Penghasil...'
+    }).then(loadingEl => {
+      loadingEl.present();
+      this.apiService.tambahPenghasil(
+        this.form.value.nama,
+        this.namaAlamat
+      ).subscribe(dataPenghasil => {
+        console.log(dataPenghasil);
+        loadingEl.dismiss();
+        this.form.reset();
+
+      });
+    });
+  }
 
 }

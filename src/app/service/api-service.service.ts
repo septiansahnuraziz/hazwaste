@@ -79,6 +79,18 @@ export class ApiServiceService {
     return this.http.post(this.url + '/ijin', body.toString(), options);
   }
 
+  tambahPenghasil(nama, lokasi) {
+    const body = new URLSearchParams();
+    body.append('nama', nama);
+    body.append('lokasi', lokasi);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.post(this.url + '/penghasil', body.toString(), options);
+  }
+
   /*addKendaraan(
     plat: string,
     jenis: string,
