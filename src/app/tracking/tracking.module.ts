@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TrackingPageRoutingModule } from './tracking-routing.module';
 
 import { TrackingPage } from './tracking.page';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { TrackingPage } from './tracking.page';
     IonicModule,
     TrackingPageRoutingModule
   ],
-  declarations: [TrackingPage]
+  declarations: [TrackingPage],
+  providers: [Geolocation]
 })
 export class TrackingPageModule {}
