@@ -20,6 +20,9 @@ export class PenghasilPage implements OnInit, AfterViewInit {
   lat: any;
   long: any;
 
+  latPenghasil: any;
+  longPenghasil: any;
+
   map;
   @ViewChild('mapElement', {static : true}) mapElement;
   @ViewChild('autoCompleteInput', {static : true}) inputNativeElement;
@@ -83,6 +86,7 @@ export class PenghasilPage implements OnInit, AfterViewInit {
         const place = autocomplete.getPlace();
         console.log(place.formatted_address);
         console.log(place.name);
+        console.log(place);
         // this.form.value.nama = place.name;
         this.namaAlamat = place.formatted_address;
         if (!place.geometry) {
@@ -90,6 +94,8 @@ export class PenghasilPage implements OnInit, AfterViewInit {
           return;
         }
         if (place.geometry.viewport) {
+          console.log(place.geometry.location.lat());
+          console.log(place.geometry.location.lng());
           this.map.fitBounds(place.geometry.viewport);
         } else {
           this.map.setCenter(place.geometry.location);
@@ -99,6 +105,11 @@ export class PenghasilPage implements OnInit, AfterViewInit {
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
 
+        const lat = place.geometry.location.lat();
+        const long = place.geometry.location.lng();
+
+        this.latPenghasil = lat;
+        this.longPenghasil = long;
 
         let address = '';
         if (place.address_components) {
@@ -160,7 +171,9 @@ export class PenghasilPage implements OnInit, AfterViewInit {
       loadingEl.present();
       this.apiService.tambahPenghasil(
         this.form.value.nama,
-        this.namaAlamat
+        this.namaAlamat,
+        this.latPenghasil,
+        this.longPenghasil
       ).subscribe(dataPenghasil => {
         console.log(dataPenghasil);
         loadingEl.dismiss();

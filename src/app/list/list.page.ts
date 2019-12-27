@@ -14,6 +14,17 @@ export class ListPage implements OnInit {
   listJenisLimbah: any = [];
   listKemasan: any = [];
   listUnit: any = [];
+  listPengelola: any = [];
+  listDriver: any = [];
+  listKendaraan: any = [];
+
+  idPenghasilSelected: any;
+  idTujuanSelected: any;
+  idKemasanSelected: any;
+  idUnitSelected: any;
+  kodeLimbahSelected: any;
+  idDriverSelected: any;
+  nomorPlatSelected: any;
 
   // private icons = [
   //   'flask',
@@ -45,6 +56,7 @@ export class ListPage implements OnInit {
     this.service.getPenghasil().subscribe(pengemudi => {
       console.log(pengemudi);
       this.listPenghasil = pengemudi;
+      
     });
 
     this.service.getJenisLimbah().subscribe(limbah => {
@@ -61,6 +73,21 @@ export class ListPage implements OnInit {
       console.log(unit);
       this.listUnit = unit;
     });
+
+    this.service.getPengelola().subscribe(pengelola => {
+      console.log(pengelola);
+      this.listPengelola = pengelola;
+    });
+
+    this.service.getPengemudi().subscribe(pengemudi => {
+      console.log(pengemudi);
+      this.listDriver = pengemudi;
+    });
+
+    this.service.getKendaraan().subscribe(plat => {
+      console.log(plat);
+      this.listKendaraan = plat;
+    });
   }
   // add back when alpha.4 is out
   // navigate(item) {
@@ -69,5 +96,33 @@ export class ListPage implements OnInit {
 
   next() {
     this.router.navigate(['/list/driver']);
+  }
+
+  onPenghasilSelected() {
+    console.log('selected Penghasil ID: ' + this.idPenghasilSelected);
+  }
+
+  onTujuanSelected() {
+    console.log('selected Tujuan ID: ' + this.idTujuanSelected);
+  }
+
+  onLimbahSelected() {
+    console.log('selected Kode Limbah: ' + this.kodeLimbahSelected);
+  }
+
+  onKemasanSelected() {
+    console.log('selected Kemasan ID: ' + this.idKemasanSelected);
+  }
+
+  onUnitSelected() {
+    console.log('selected Unit ID: ' + this.idUnitSelected);
+  }
+
+  onDriverSelected() {
+    console.log('selected Unit ID: ' + this.idDriverSelected);
+  }
+
+  onPlatSelected() {
+    console.log('selected Plat Nomor: ' + this.nomorPlatSelected);
   }
 }

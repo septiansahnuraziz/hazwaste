@@ -18,20 +18,21 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Penghasil</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let item of listPenghasil" value="item.id">{{item.nama}}</ion-select-option>
+      <ion-select (ionChange)="onPenghasilSelected()" name="idPenghasilSelected" [(ngModel)]="idPenghasilSelected">
+        <ion-select-option *ngFor="let item of listPenghasil" value="{{item.id}}" 
+        >{{item.nama}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Jenis Limbah</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let item of listJenisLimbah"  value="item.id">{{item.jenis}}</ion-select-option>
+      <ion-select (ionChange)="onLimbahSelected()" name="kodeLimbahSelected" [(ngModel)]="kodeLimbahSelected">
+        <ion-select-option *ngFor="let item of listJenisLimbah"  value="{{item.kode_limbah}}">{{item.jenis}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Kelompok Kemasan</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let item of listKemasan"  value="item.id">{{item.kemasan}}</ion-select-option>
+      <ion-select (ionChange)="onKemasanSelected()" name="idKemasanSelected" [(ngModel)]="idKemasanSelected">
+        <ion-select-option *ngFor="let item of listKemasan"  value="{{item.id}}">{{item.kemasan}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -44,16 +45,33 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Unit</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let item of listUnit" value="item.id">{{item.unit}}</ion-select-option>
+      <ion-select (ionChange)="onUnitSelected()" name="idUnitSelected" [(ngModel)]="idUnitSelected">
+        <ion-select-option *ngFor="let item of listUnit" value="{{item.id}}">{{item.unit}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Tujuan</ion-label>
-      <ion-select>
-        <ion-select-option value="cat">Cat</ion-select-option>
-        <ion-select-option value="dog">Dog</ion-select-option>
+      <ion-select (ionChange)="onTujuanSelected()" name="idTujuanSelected" [(ngModel)]="idTujuanSelected">
+        <ion-select-option *ngFor="let item of listPengelola"  value="{{item.id}}">{{item.nama}}</ion-select-option>
       </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Driver</ion-label>
+      <ion-select (ionChange)="onDriverSelected()" name="idDriverSelected" [(ngModel)]="idDriverSelected">
+        <ion-select-option *ngFor="let item of listDriver" value="{{item.sim}}">{{item.nama}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Plat Nomor</ion-label>
+      <ion-select (ionChange)="onPlatSelected()" name="nomorPlatSelected" [(ngModel)]="nomorPlatSelected">
+        <ion-select-option *ngFor="let item of listKendaraan" value="{{item.plat}}">{{item.plat}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Tanggal
+      </ion-label>
+      <ion-datetime min="2019-01-01" max="2025-12-31"></ion-datetime>
     </ion-item>
   </ion-list>
   <div class="ion-padding">

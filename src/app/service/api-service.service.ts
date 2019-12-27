@@ -79,10 +79,12 @@ export class ApiServiceService {
     return this.http.post(this.url + '/ijin', body.toString(), options);
   }
 
-  tambahPenghasil(nama, lokasi) {
+  tambahPenghasil(nama, lokasi, latitude, longitude) {
     const body = new URLSearchParams();
     body.append('nama', nama);
     body.append('lokasi', lokasi);
+    body.append('latitude', latitude);
+    body.append('longitude', longitude);
 
     const options = {
       headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
@@ -297,4 +299,13 @@ export class ApiServiceService {
   getUnit() {
     return this.http.get(this.url + '/unit');
   }
+
+  getPengelola() {
+    return this.http.get(this.url + '/pengelola');
+  }
+
+  getKendaraan() {
+    return this.http.get(this.url + '/kendaraan');
+  }
+
 }
