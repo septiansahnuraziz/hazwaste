@@ -10,60 +10,61 @@
 </ion-header>
 
 <ion-content>
-    <form onsubmit="processForm(event)">
+    <form [formGroup]="manifestForm">
   <ion-list>
     <ion-item>
       <ion-label position="floating">No <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+      <ion-input required formControlName="nomorManifest" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Penghasil</ion-label>
-      <ion-select (ionChange)="onPenghasilSelected()" name="idPenghasilSelected" [(ngModel)]="idPenghasilSelected">
+      <ion-select formControlName="idPenghasil" (ionChange)="onPenghasilSelected($event)">
         <ion-select-option *ngFor="let item of listPenghasil" value="{{item.id}}" 
         >{{item.nama}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Jenis Limbah</ion-label>
-      <ion-select (ionChange)="onLimbahSelected()" name="kodeLimbahSelected" [(ngModel)]="kodeLimbahSelected">
+      <ion-select formControlName="kodeLimbah" (ionChange)="onLimbahSelected($event)">
         <ion-select-option *ngFor="let item of listJenisLimbah"  value="{{item.kode_limbah}}">{{item.jenis}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Kelompok Kemasan</ion-label>
-      <ion-select (ionChange)="onKemasanSelected()" name="idKemasanSelected" [(ngModel)]="idKemasanSelected">
+      <ion-select formControlName="idKemasan" (ionChange)="onKemasanSelected($event)">
         <ion-select-option *ngFor="let item of listKemasan"  value="{{item.id}}">{{item.kemasan}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Jumlah Pesanan<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+      <ion-input required formControlName="jumlahPesanan" type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Satuan <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+      <ion-input required formControlName="satuan" type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Unit</ion-label>
-      <ion-select (ionChange)="onUnitSelected()" name="idUnitSelected" [(ngModel)]="idUnitSelected">
+      <ion-select formControlName="idUnit" (ionChange)="onUnitSelected($event)">
         <ion-select-option *ngFor="let item of listUnit" value="{{item.id}}">{{item.unit}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Tujuan</ion-label>
-      <ion-select (ionChange)="onTujuanSelected()" name="idTujuanSelected" [(ngModel)]="idTujuanSelected">
-        <ion-select-option *ngFor="let item of listPengelola"  value="{{item.id}}">{{item.nama}}</ion-select-option>
+      <ion-select formControlName="idTujuan" (ionChange)="onTujuanSelected($event)">
+        <ion-select-option *ngFor="let item of listPengelola" value="{{item.id}}">{{item.nama}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Driver</ion-label>
-      <ion-select (ionChange)="onDriverSelected()" name="idDriverSelected" [(ngModel)]="idDriverSelected">
+      <ion-select formControlName="driver" (ionChange)="onDriverSelected($event)">
         <ion-select-option *ngFor="let item of listDriver" value="{{item.sim}}">{{item.nama}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Plat Nomor</ion-label>
-      <ion-select (ionChange)="onPlatSelected()" name="nomorPlatSelected" [(ngModel)]="nomorPlatSelected">
+      
+      <ion-select formControlName="plat" (ionChange)="onPlatSelected($event)">
         <ion-select-option *ngFor="let item of listKendaraan" value="{{item.plat}}">{{item.plat}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -71,11 +72,14 @@
       <ion-label>
         Tanggal
       </ion-label>
-      <ion-datetime min="2019-01-01" max="2025-12-31"></ion-datetime>
+      <ion-datetime formControlName="tanggal" min="2019-01-01" max="2025-12-31"></ion-datetime>
     </ion-item>
   </ion-list>
-  <div class="ion-padding">
+  <!-- <div class="ion-padding">
     <ion-button expand="block" (click)="next()" class="ion-no-margin">NEXT</ion-button>
+  </div> -->
+  <div class="ion-padding">
+    <ion-button expand="block" [disabled]="!manifestForm.valid" (click)="simpanData()" class="ion-no-margin">SIMPAN</ion-button>
   </div>
   </form>
   <!--

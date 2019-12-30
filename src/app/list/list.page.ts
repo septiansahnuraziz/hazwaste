@@ -1,5 +1,7 @@
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ApiServiceService } from 'src/app/service/api-service.service';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPage implements OnInit {
   private selectedItem: any;
+
+  manifestForm: FormGroup;
 
   listPenghasil: any = [];
   listJenisLimbah: any = [];
@@ -26,6 +30,8 @@ export class ListPage implements OnInit {
   idDriverSelected: any;
   nomorPlatSelected: any;
 
+  listManifest: any = [];
+
   // private icons = [
   //   'flask',
   //   'wifi',
@@ -41,7 +47,9 @@ export class ListPage implements OnInit {
   public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(
     private router: Router,
-    private service: ApiServiceService
+    private service: ApiServiceService,
+    private loadingController: LoadingController,
+    private formBuilder: FormBuilder
   ) {
     // for (let i = 1; i < 11; i++) {
     //   this.items.push({
@@ -50,13 +58,58 @@ export class ListPage implements OnInit {
     //     icon: this.icons[Math.floor(Math.random() * this.icons.length)]
     //   });
     // }
+    this.manifestForm = this.formBuilder.group({
+      nomorManifest: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      idPenghasil: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      kodeLimbah: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      idKemasan: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      jumlahPesanan: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      satuan: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      idUnit: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      idTujuan: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      driver: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      plat: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      tanggal: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+    });
   }
 
   ngOnInit() {
     this.service.getPenghasil().subscribe(pengemudi => {
       console.log(pengemudi);
       this.listPenghasil = pengemudi;
-      
     });
 
     this.service.getJenisLimbah().subscribe(limbah => {
@@ -89,6 +142,7 @@ export class ListPage implements OnInit {
       this.listKendaraan = plat;
     });
   }
+
   // add back when alpha.4 is out
   // navigate(item) {
   //   this.router.navigate(['/list', JSON.stringify(item)]);
@@ -98,31 +152,77 @@ export class ListPage implements OnInit {
     this.router.navigate(['/list/driver']);
   }
 
-  onPenghasilSelected() {
+  simpanData() {
+    if (!this.manifestForm.valid) {
+      return;
+    }
+
+    this.listManifest = [
+      this.manifestForm.value.nomorManifest,
+      this.manifestForm.value.idPenghasil,
+      this.manifestForm.value.kodeLimbah,
+      this.manifestForm.value.idKemasan,
+      this.manifestForm.value.jumlahPesanan,
+      this.manifestForm.value.satuan,
+      this.manifestForm.value.idUnit,
+      this.manifestForm.value.idTujuan,
+      this.manifestForm.value.driver,
+      this.manifestForm.value.plat,
+      this.manifestForm.value.tanggal,
+
+    ];
+
+    console.log(this.listManifest);
+  }
+
+  onPenghasilSelected(event) {
+    
+    this.manifestForm.value.idPenghasil = event.detail.value;
+    this.idPenghasilSelected = this.manifestForm.value.idPenghasil;
     console.log('selected Penghasil ID: ' + this.idPenghasilSelected);
   }
 
-  onTujuanSelected() {
-    console.log('selected Tujuan ID: ' + this.idTujuanSelected);
-  }
+  
 
-  onLimbahSelected() {
+  onLimbahSelected(event) {
+    
+    this.manifestForm.value.kodeLimbah = event.detail.value;
+    this.kodeLimbahSelected = this.manifestForm.value.kodeLimbah;
     console.log('selected Kode Limbah: ' + this.kodeLimbahSelected);
   }
 
-  onKemasanSelected() {
+  onKemasanSelected(event) {
+    
+    this.manifestForm.value.idKemasan = event.detail.value;
+    this.idKemasanSelected = this.manifestForm.value.idKemasan;
     console.log('selected Kemasan ID: ' + this.idKemasanSelected);
   }
 
-  onUnitSelected() {
+  onUnitSelected(event) {
+    
+    this.manifestForm.value.idUnit = event.detail.value;
+    this.idUnitSelected = this.manifestForm.value.idUnit;
     console.log('selected Unit ID: ' + this.idUnitSelected);
   }
 
-  onDriverSelected() {
-    console.log('selected Unit ID: ' + this.idDriverSelected);
+  onTujuanSelected(event) {
+    
+    this.manifestForm.value.idTujuan = event.detail.value;
+    this.idTujuanSelected = this.manifestForm.value.idTujuan;
+    console.log('selected Tujuan ID: ' + this.idTujuanSelected);
   }
 
-  onPlatSelected() {
+  onDriverSelected(event) {
+
+    this.manifestForm.value.driver = event.detail.value;
+    this.idDriverSelected = this.manifestForm.value.driver;
+    console.log('selected Driver SIM: ' + this.idDriverSelected);
+  }
+
+  onPlatSelected(event) {
+    console.log(event.detail.value);
+    this.manifestForm.value.plat = event.detail.value;
+    this.nomorPlatSelected = this.manifestForm.value.plat;
     console.log('selected Plat Nomor: ' + this.nomorPlatSelected);
   }
 }

@@ -30,11 +30,32 @@
                         <ion-avatar slot="start">
                           <img src="https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-15.jpg">
                         </ion-avatar>
-                        <ion-label>
-                          <h2>{{driver.nama}}</h2>
-                          <p>{{driver.sim}}</p>
-                          <p>{{driver.telepon}}</p>
-                        </ion-label>
+                        <ion-grid>
+                          <ion-row>
+                            <ion-col size="3">
+                              <p><b>Nama</b></p>
+                            </ion-col>
+                            <ion-col size="9">
+                              <p>{{driver.nama}}</p>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col size="3">
+                             <p><b>SIM</b></p>
+                            </ion-col>
+                            <ion-col size="9">
+                            <p>{{driver.sim}}</p>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col size="3">
+                              <p><b>No. Telp</b></p>
+                            </ion-col>
+                            <ion-col size="9">
+                              <p>{{driver.telepon}}</p>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
                       </ion-item>
                 </div>
               </div> <br>

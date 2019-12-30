@@ -21,11 +21,11 @@ export class AddPengemudiPage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      nama: new FormControl(null, {
+      sim: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      sim: new FormControl(null, {
+      nama: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
@@ -46,8 +46,8 @@ export class AddPengemudiPage implements OnInit {
     }).then(loadingEl => {
       loadingEl.present();
       this.apiService.tambahPengemudi(
-        this.form.value.nama,
         this.form.value.sim,
+        this.form.value.nama,
         this.form.value.telp
       ).subscribe((dataPengendara) => {
         console.log(dataPengendara);
