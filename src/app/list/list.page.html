@@ -12,10 +12,10 @@
 <ion-content>
     <form [formGroup]="manifestForm">
   <ion-list>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">No <ion-text color="danger">*</ion-text></ion-label>
       <ion-input required formControlName="nomorManifest" type="text"></ion-input>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
       <ion-label position="floating">Penghasil</ion-label>
       <ion-select formControlName="idPenghasil" (ionChange)="onPenghasilSelected($event)">
@@ -55,7 +55,7 @@
         <ion-select-option *ngFor="let item of listPengelola" value="{{item.id}}">{{item.nama}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Driver</ion-label>
       <ion-select formControlName="driver" (ionChange)="onDriverSelected($event)">
         <ion-select-option *ngFor="let item of listDriver" value="{{item.sim}}">{{item.nama}}</ion-select-option>
@@ -73,14 +73,14 @@
         Tanggal
       </ion-label>
       <ion-datetime formControlName="tanggal" min="2019-01-01" max="2025-12-31"></ion-datetime>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
-  <!-- <div class="ion-padding">
-    <ion-button expand="block" (click)="next()" class="ion-no-margin">NEXT</ion-button>
-  </div> -->
   <div class="ion-padding">
-    <ion-button expand="block" [disabled]="!manifestForm.valid" (click)="simpanData()" class="ion-no-margin">SIMPAN</ion-button>
+    <ion-button expand="block" [disabled]="!manifestForm.valid" (click)="next()" class="ion-no-margin">NEXT</ion-button>
   </div>
+  <!-- <div class="ion-padding">
+    <ion-button expand="block" [disabled]="!manifestForm.valid" (click)="simpanData()" class="ion-no-margin">SIMPAN</ion-button>
+  </div> -->
   </form>
   <!--
     <div *ngIf="selectedItem" padding>

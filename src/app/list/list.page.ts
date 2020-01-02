@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
 
   manifestForm: FormGroup;
 
@@ -45,6 +44,7 @@ export class ListPage implements OnInit {
   //   'build'
   // ];
   public items: Array<{ title: string; note: string; icon: string }> = [];
+
   constructor(
     private router: Router,
     private service: ApiServiceService,
@@ -59,10 +59,10 @@ export class ListPage implements OnInit {
     //   });
     // }
     this.manifestForm = this.formBuilder.group({
-      nomorManifest: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
+      // nomorManifest: new FormControl(null, {
+      //   updateOn: 'blur',
+      //   validators: [Validators.required]
+      // }),
       idPenghasil: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
@@ -90,19 +90,19 @@ export class ListPage implements OnInit {
       idTujuan: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
-      }),
-      driver: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      plat: new FormControl('', {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      tanggal: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
+      })
+      // driver: new FormControl(null, {
+      //   updateOn: 'blur',
+      //   validators: [Validators.required]
+      // }),
+      // plat: new FormControl('', {
+      //   updateOn: 'blur',
+      //   validators: [Validators.required]
+      // }),
+      // tanggal: new FormControl(null, {
+      //   updateOn: 'blur',
+      //   validators: [Validators.required]
+      // }),
     });
   }
 
@@ -148,65 +148,37 @@ export class ListPage implements OnInit {
   //   this.router.navigate(['/list', JSON.stringify(item)]);
   // }
 
-  next() {
-    this.router.navigate(['/list/driver']);
-  }
-
-  simpanData() {
-    if (!this.manifestForm.valid) {
-      return;
-    }
-
-    this.listManifest = [
-      this.manifestForm.value.nomorManifest,
-      this.manifestForm.value.idPenghasil,
-      this.manifestForm.value.kodeLimbah,
-      this.manifestForm.value.idKemasan,
-      this.manifestForm.value.jumlahPesanan,
-      this.manifestForm.value.satuan,
-      this.manifestForm.value.idUnit,
-      this.manifestForm.value.idTujuan,
-      this.manifestForm.value.driver,
-      this.manifestForm.value.plat,
-      this.manifestForm.value.tanggal,
-
-    ];
-
-    console.log(this.listManifest);
-  }
+  // next() {
+  //   this.router.navigate(['/list/driver']);
+  // }
 
   onPenghasilSelected(event) {
-    
+
     this.manifestForm.value.idPenghasil = event.detail.value;
     this.idPenghasilSelected = this.manifestForm.value.idPenghasil;
     console.log('selected Penghasil ID: ' + this.idPenghasilSelected);
   }
 
-  
-
   onLimbahSelected(event) {
-    
     this.manifestForm.value.kodeLimbah = event.detail.value;
     this.kodeLimbahSelected = this.manifestForm.value.kodeLimbah;
     console.log('selected Kode Limbah: ' + this.kodeLimbahSelected);
   }
 
   onKemasanSelected(event) {
-    
     this.manifestForm.value.idKemasan = event.detail.value;
     this.idKemasanSelected = this.manifestForm.value.idKemasan;
     console.log('selected Kemasan ID: ' + this.idKemasanSelected);
   }
 
   onUnitSelected(event) {
-    
     this.manifestForm.value.idUnit = event.detail.value;
     this.idUnitSelected = this.manifestForm.value.idUnit;
     console.log('selected Unit ID: ' + this.idUnitSelected);
   }
 
   onTujuanSelected(event) {
-    
+
     this.manifestForm.value.idTujuan = event.detail.value;
     this.idTujuanSelected = this.manifestForm.value.idTujuan;
     console.log('selected Tujuan ID: ' + this.idTujuanSelected);
@@ -220,9 +192,39 @@ export class ListPage implements OnInit {
   }
 
   onPlatSelected(event) {
-    console.log(event.detail.value);
+
     this.manifestForm.value.plat = event.detail.value;
     this.nomorPlatSelected = this.manifestForm.value.plat;
     console.log('selected Plat Nomor: ' + this.nomorPlatSelected);
+  }
+
+  next() {
+    if (!this.manifestForm.valid) {
+      return;
+    }
+
+    this.loadingController.create({
+        message: 'Menambah Manifest Baru...'
+      }).then(loadingEl => {
+        loadingEl.present();
+        this.service.tambahManifest(
+          this.idPenghasilSelected,
+          this.kodeLimbahSelected,
+          this.manifestForm.value.jumlahPesanan,
+          this.manifestForm.value.satuan,
+          this.idUnitSelected,
+          this.idKemasanSelected,
+          this.idTujuanSelected
+        ).subscribe((dataManifest) => {
+          loadingEl.dismiss();
+          // this.manifestForm.reset();
+          this.router.navigate(['/list/driver']);
+          console.log(this.listManifest);
+        });
+
+        // localStorage.setItem('no_manifest', )
+      });
+
+    console.log(this.listManifest);
   }
 }

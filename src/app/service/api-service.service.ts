@@ -224,6 +224,49 @@ export class ApiServiceService {
     return this.http.post(this.url + '/pengemudi', body.toString(), options);
   }
 
+  tambahManifest(idPenghasil, kodeLimbah, jumlah, bobot, idUnit, idKemasan, idTujuan) {
+    const body = new URLSearchParams();
+    body.append('id_penghasil', idPenghasil);
+    body.append('jumlah', jumlah);
+    body.append('bobot', bobot);
+    body.append('id_unit', idUnit);
+    body.append('id_kemasan', idKemasan);
+    body.append('id_limbah', kodeLimbah);
+    body.append('id_tujuan', idTujuan);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.post(this.url + '/manifest', body.toString(), options);
+  }
+
+  updateLastManifest(idPerjalanan, tanggal) {
+    const body = new URLSearchParams();
+    body.append('id_perjalanan', idPerjalanan);
+    body.append('tanggal', tanggal);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.put(this.url + '/updateLastManifest', body.toString(), options);
+  }
+
+  tambahPerjalanan(plat, sim, status, tanggal) {
+    const body = new URLSearchParams();
+    body.append('plat', plat);
+    body.append('sim', sim);
+    body.append('status', status);
+    body.append('tanggal', tanggal);
+
+    const options = {
+      headers: new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.post(this.url + '/perjalanan', body.toString(), options);
+  }
+
   /*addPengemudi(
     nama: string,
     noSim: string,
@@ -306,6 +349,18 @@ export class ApiServiceService {
 
   getKendaraan() {
     return this.http.get(this.url + '/kendaraan');
+  }
+
+  getAvailableVehicle() {
+    return this.http.get(this.url + '/availableVehicle');
+  }
+
+  getAvailableDriver() {
+    return this.http.get(this.url + '/availableDriver');
+  }
+
+  getActiveTransport(plat) {
+    return this.http.get(this.url + '/activeTransport/' + plat);
   }
 
 }
