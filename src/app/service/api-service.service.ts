@@ -363,4 +363,8 @@ export class ApiServiceService {
     return this.http.get(this.url + '/activeTransport/' + plat);
   }
 
+  getAllManifest() {
+    return this.http.get(this.url + '/manifest');
+  }
+
 }

@@ -1,3 +1,4 @@
+import { ApiServiceService } from 'src/app/service/api-service.service';
 import { Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
@@ -15,8 +16,12 @@ export class TrackingPage implements OnInit, AfterViewInit {
   map;
   @ViewChild('mapElement', {static : true}) mapElement;
 
+  listManifest: any;
+  tanggal: Date;
+
   constructor(
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private apiService: ApiServiceService
   ) { }
 
   ngOnInit() {
@@ -48,6 +53,13 @@ export class TrackingPage implements OnInit, AfterViewInit {
       infoWindow.open(this.map, marker);
   }).catch((error) => {
     console.log('Error getting location', error);
+  });
+
+    this.apiService.getAllManifest()
+  .subscribe(dataManifest => {
+    console.log(dataManifest);
+    this.listManifest = dataManifest;
+    this.tanggal = dataManifest['tanggal'];
   });
 }
 }

@@ -9,4 +9,25 @@
 
 <ion-content>
   <div #mapElement class="map"></div>
+    <ion-list>
+    <ion-item class="ion-activatable ; ion-no-padding" *ngFor="let item of listManifest">
+      <ion-grid class="ion-padding">
+        <ion-row>
+          <ion-col>
+            {{item.manifest_no}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            {{item.tanggal | date: "dd MMM, yyyy"}}
+          </ion-col>
+          <ion-col size="2">
+            <ion-text>Detail...</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-item>
+  </ion-list>
 </ion-content>
