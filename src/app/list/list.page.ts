@@ -31,20 +31,6 @@ export class ListPage implements OnInit {
 
   listManifest: any = [];
 
-  // private icons = [
-  //   'flask',
-  //   'wifi',
-  //   'beer',
-  //   'football',
-  //   'basketball',
-  //   'paper-plane',
-  //   'american-football',
-  //   'boat',
-  //   'bluetooth',
-  //   'build'
-  // ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-
   constructor(
     private router: Router,
     private service: ApiServiceService,

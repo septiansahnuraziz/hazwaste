@@ -10,7 +10,7 @@
 <ion-content>
   <div #mapElement class="map"></div>
     <ion-list>
-    <ion-item class="ion-activatable ; ion-no-padding" *ngFor="let item of listManifest">
+    <ion-item class="ion-activatable ; ion-no-padding" *ngFor="let item of listManifest" (click)="clickManifest()">
       <ion-grid class="ion-padding">
         <ion-row>
           <ion-col>
@@ -18,15 +18,19 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
+          <ion-col size="10">
             {{item.tanggal | date: "dd MMM, yyyy"}}
           </ion-col>
           <ion-col size="2">
             <ion-text>Detail...</ion-text>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text>{{item.nama_penghasil}}</ion-text>
+          </ion-col>
+        </ion-row>
       </ion-grid>
-      
       <ion-ripple-effect></ion-ripple-effect>
     </ion-item>
   </ion-list>

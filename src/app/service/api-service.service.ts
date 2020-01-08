@@ -331,6 +331,10 @@ export class ApiServiceService {
     return this.http.get(this.url + '/penghasil');
   }
 
+  getPenghasilById(idPenghasil) {
+    return this.http.get(this.url + '/penghasil/' + idPenghasil);
+  }
+
   getJenisLimbah() {
     return this.http.get(this.url + '/jenis');
   }
@@ -345,6 +349,10 @@ export class ApiServiceService {
 
   getPengelola() {
     return this.http.get(this.url + '/pengelola');
+  }
+
+  getPengelolaById(idPengelola) {
+    return this.http.get(this.url + '/pengelola/' + idPengelola);
   }
 
   getKendaraan() {
