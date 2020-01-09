@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <div #mapElement class="map"></div>
+  <div #mapElement id="map"></div>
     <ion-list>
-    <ion-item class="ion-activatable ; ion-no-padding" *ngFor="let item of listManifest" (click)="clickManifest()">
+    <ion-item class="ion-activatable ; ion-no-padding" *ngFor="let item of listManifest" (click)="clickManifest(item.nama_penghasil, item.nama_tujuan)">
       <ion-grid class="ion-padding">
         <ion-row>
           <ion-col>

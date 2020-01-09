@@ -64,23 +64,43 @@ export class PenghasilPage implements OnInit, AfterViewInit {
         }
       );
 
-      const infoWindow = new google.maps.InfoWindow();
-      const infoWindowContent = document.getElementById('infowindow-content');
-      infoWindow.setContent(infoWindowContent);
+      console.log(resp);
+
+      const pos = {
+        lat: resp.coords.latitude,
+        lng: resp.coords.longitude
+      };
+
+      this.map.setCenter(pos);
+
+      const icon = {
+        url: 'assets/icon/iconGPS.png',
+        scaledSize: new google.maps.Size(50, 50),
+      };
 
       const marker = new google.maps.Marker({
-        // position: pos,
+        position: pos,
         map: this.map,
         title: 'Your location',
+        icon: icon,
         anchorPoint: new google.maps.Point(0, 10)
       });
 
-      // marker.addListener('click', function() {
-      //   infoWindow.open(this.map, marker);
-      // });
+      const infoWindow = new google.maps.InfoWindow(
+        {
+        content: 'You are here',
+        maxWidth: 400
+      }
+      );
+      marker.addListener('click', function() {
+        infoWindow.open(this.map, marker);
+      });
+
+      const infoWindowContent = document.getElementById('infowindow-content');
 
       const autocomplete = new google.maps.places.Autocomplete(this.inputNativeElement.nativeElement as HTMLInputElement);
       autocomplete.addListener('place_changed', () => {
+        infoWindow.setContent(infoWindowContent);
         infoWindow.close();
         marker.setVisible(false);
         const place = autocomplete.getPlace();
@@ -89,6 +109,8 @@ export class PenghasilPage implements OnInit, AfterViewInit {
         console.log(place);
         // this.form.value.nama = place.name;
         this.namaAlamat = place.formatted_address;
+
+        
         if (!place.geometry) {
           window.alert('No details available for input: ' + place.name);
           return;
@@ -99,7 +121,7 @@ export class PenghasilPage implements OnInit, AfterViewInit {
           this.map.fitBounds(place.geometry.viewport);
         } else {
           this.map.setCenter(place.geometry.location);
-          this.map.setZoom(17);
+          this.map.setZoom(15);
 
         }
         marker.setPosition(place.geometry.location);
@@ -107,6 +129,8 @@ export class PenghasilPage implements OnInit, AfterViewInit {
 
         const lat = place.geometry.location.lat();
         const long = place.geometry.location.lng();
+
+        
 
         this.latPenghasil = lat;
         this.longPenghasil = long;
@@ -120,12 +144,12 @@ export class PenghasilPage implements OnInit, AfterViewInit {
           ].join(' ');
         }
 
-
-
-        infoWindowContent.children['place-icon'].src = place.icon;
+        // infoWindowContent.children['place-icon'].src = place.icon;
         infoWindowContent.children['place-name'].textContent = place.name;
         infoWindowContent.children['place-address'].textContent = address;
         infoWindow.open(this.map, marker);
+
+        
       });
 
     }).catch((error) => {
